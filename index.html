@@ -213,10 +213,9 @@
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
                     <img src="imagenes/TRENTO LOGO (2).png" alt="Trento Picadas Logo"
                         class="h-16 w-auto object-contain">
-                    <class="text-brand-green">
-                        <span class="font-sans font-extrabold text-2xl tracking-tight text-brand-dark">Trento
-                            Picadas<span class="text-brand-green"></span></span>
-                        </span>
+                    <span class="font-sans font-extrabold text-2xl tracking-tight text-brand-dark">
+                        Trento Picadas
+                    </span>
                 </div>
 
                 <!-- Desktop Menu -->
@@ -235,18 +234,15 @@
                             class="relative flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-md border border-gray-200 hover:shadow-lg transition">
                             <i class="fa-solid fa-cart-shopping text-xl text-brand-dark"></i>
 
-                            <!-- Contador -->
                             <span id="cart-count"
                                 class="absolute -top-2 -right-2 bg-brand-green text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
                                 0
                             </span>
                         </button>
 
-                        <!-- Dropdown del carrito -->
                         <div id="cart-dropdown"
                             class="hidden absolute right-0 mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 overflow-hidden">
 
-                            <!-- Header -->
                             <div class="p-4 border-b border-gray-200 flex items-center justify-between">
                                 <h3 class="font-sans font-bold text-lg text-brand-dark flex items-center gap-2">
                                     <i class="fa-solid fa-cart-shopping text-brand-green"></i>
@@ -257,12 +253,10 @@
                                 </button>
                             </div>
 
-                            <!-- Productos -->
                             <div id="cart-items" class="max-h-80 overflow-y-auto p-4 space-y-3">
                                 <p id="cart-empty" class="text-gray-500 text-sm">Tu carrito está vacío.</p>
                             </div>
 
-                            <!-- Footer -->
                             <div class="border-t border-gray-200 p-4">
                                 <div class="flex items-center justify-between mb-4">
                                     <span class="font-sans font-semibold text-brand-dark">Total:</span>
@@ -270,36 +264,35 @@
                                         class="font-sans font-extrabold text-xl text-brand-dark">$0</span>
                                 </div>
 
-                                <button onclick="document.getElementById('cart-dropdown').classList.add('hidden')"
-                                    class="w-full border-2 border-gray-200 text-gray-600 py-2.5 rounded-xl font-sans font-bold hover:border-brand-green hover:text-brand-green transition">
-                                    Seguir comprando
-                                </button>
+                                <div class="flex flex-col gap-2">
+                                    <button onclick="document.getElementById('cart-dropdown').classList.add('hidden')"
+                                        class="w-full border-2 border-gray-200 text-gray-600 py-2.5 rounded-xl font-sans font-bold hover:border-brand-green hover:text-brand-green transition">
+                                        Seguir comprando
+                                    </button>
 
-
-                                <button onclick="sendCartToWhatsApp()"
-                                    class="w-full bg-brand-green text-white py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex items-center justify-center gap-2 shadow-lg">
-                                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                                    Finalizar pedido
-                                </button>
+                                    <button onclick="sendCartToWhatsApp()"
+                                        class="w-full bg-brand-green text-white py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex items-center justify-center gap-2 shadow-lg">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                                        Finalizar pedido
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
+                        class="bg-brand-green text-white px-6 py-2.5 rounded-full font-sans font-semibold hover:bg-green-700 hover:shadow-glow transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Pedir por WhatsApp
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-green focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
             </div>
-
-            <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
-                class="bg-brand-green text-white px-6 py-2.5 rounded-full font-sans font-semibold hover:bg-green-700 hover:shadow-glow transition-all flex items-center gap-2">
-                <i class="fa-brands fa-whatsapp text-lg"></i> Pedir por WhatsApp
-            </a>
-            </nav>
-
-
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-green focus:outline-none">
-                    <i class="fa-solid fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </div>
         </div>
 
         <!-- Mobile Menu Dropdown -->
@@ -321,6 +314,7 @@
             </div>
         </div>
     </header>
+
 
     <!-- ==========================================
         2. HERO PRINCIPAL (SECCIÓN DE IMPACTO)
@@ -870,26 +864,26 @@
                 </div>
                 <div class="space-y-4 max-w-2xl mx-auto">
                     <div
-                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        class="flex flex-col sm:flex-row items-center sm:items-baseline sm:justify-between gap-1 text-center">
                         <span class="text-base md:text-lg text-brand-dark font-medium">Retiros sin costo por
                             Caballito</span>
                         <span class="text-base md:text-lg font-bold text-brand-green">Gratis</span>
                     </div>
                     <div class="h-px bg-white/90"></div>
                     <div
-                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        class="flex flex-col sm:flex-row items-center sm:items-baseline sm:justify-between gap-1 text-center">
                         <span class="text-base md:text-lg text-brand-dark font-medium">Envíos hasta 4 km</span>
                         <span class="text-base md:text-lg font-bold text-brand-dark">$5.000</span>
                     </div>
                     <div class="h-px bg-white/90"></div>
                     <div
-                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        class="flex flex-col sm:flex-row items-center sm:items-baseline sm:justify-between gap-1 text-center">
                         <span class="text-base md:text-lg text-brand-dark font-medium">De 4 km a 8 km</span>
                         <span class="text-base md:text-lg font-bold text-brand-dark">$6.000</span>
                     </div>
                     <div class="h-px bg-white/90"></div>
                     <div
-                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        class="flex flex-col sm:flex-row items-center sm:items-baseline sm:justify-between gap-1 text-center">
                         <span class="text-base md:text-lg text-brand-dark font-medium">Más de 8 km</span>
                         <span class="text-base md:text-lg font-bold text-brand-dark">$7.000</span>
                     </div>
@@ -1121,7 +1115,7 @@ CARRITO FLOTANTE MOBILE
         aria-hidden="true"></div>
 
     <div id="mobile-cart-panel"
-        class="hidden md:hidden fixed left-4 right-4 bottom-28 z-50 bg-white rounded-[2rem] shadow-2xl border border-white/60 overflow-hidden">
+        class="hidden md:hidden fixed left-4 right-4 top-24 bottom-24 z-50 bg-white rounded-[2rem] shadow-2xl border border-white/60 overflow-hidden flex flex-col">
         <div class="p-4 border-b border-gray-200 flex items-center justify-between">
             <h3 class="font-sans font-bold text-lg text-brand-dark flex items-center gap-2">
                 <i class="fa-solid fa-cart-shopping text-brand-green"></i>
@@ -1132,7 +1126,7 @@ CARRITO FLOTANTE MOBILE
             </button>
         </div>
 
-        <div id="mobile-cart-items" class="max-h-72 overflow-y-auto p-4 space-y-3">
+        <div id="mobile-cart-items" class="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
             <p class="text-gray-500 text-sm">Tu carrito está vacío.</p>
         </div>
 
@@ -1286,8 +1280,9 @@ CARRITO FLOTANTE MOBILE
             #mobile-cart-panel {
                 left: 1rem;
                 right: 1rem;
-                bottom: 20rem;
-                max-height: calc(100vh - 22rem);
+                top: 5.5rem;
+                bottom: 7rem;
+                max-height: none;
             }
         }
     </style>
