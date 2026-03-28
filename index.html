@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trento Picadas Artesanales | Catálogo </title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome para Íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuración estricta de la marca en Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#009145', // Principal / Botones / Headers
+                            red: '#cc2b37',   // Secundario / Promos / Acentos
+                            dark: '#414042',  // Textos / Títulos
+                            bg: '#e4e6d4',    // Fondo general cálido
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'], // Títulos
+                        body: ['Poppins', 'sans-serif'],    // Textos
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(0, 145, 69, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Ajustes finos para darle un toque premium */
+        body {
+            background-color: #e4e6d4;
+            color: #414042;
+        }
+
+        .glass-header {
+            background: rgba(228, 230, 212, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .product-card {
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .hero-img-mask {
+            border-radius: 2rem 2rem 2rem 10rem;
+        }
+
+        /* Ocultar barra de scroll en contenedores horizontales si es necesario */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased relative selection:bg-brand-green selection:text-white">
+
+    <!-- ==========================================
+        MODAL DE ADVERTENCIA (ESTILO TRENTO)
+    =========================================== -->
+    <div id="modal-advertencia"
+        class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[#1a1c1e]/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-500">
+
+        <!-- Contenedor del Cartel - Siguiendo el radio de las cards de productos -->
+        <div class="bg-[#e7e8d8] rounded-[3rem] max-w-lg w-full overflow-hidden shadow-2xl transform scale-95 transition-transform duration-500 relative border border-white/20"
+            id="modal-content">
+
+            <!-- Decoración superior: Icono circular -->
+            <div class="pt-10 flex justify-center">
+                <div
+                    class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100">
+                    <i class="fa-solid fa-clock text-[#c52c2c] text-3xl"></i>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-10 text-center">
+                <!-- Título con la fuente pesada de Trento -->
+                <h2
+                    class="font-sans font-black text-[#1a1c1e] text-3xl md:text-4xl mb-2 leading-tight tracking-tight uppercase">
+                    ¡PEDIDOS CON <br><span class="text-[#c52c2c]">ANTICIPACIÓN!</span>
+                </h2>
+
+                <p class="text-[#1a1c1e]/60 font-medium mb-8 uppercase tracking-[0.2em] text-xs">Información Importante
+                </p>
+
+                <!-- Cuerpo del mensaje -->
+                <div class="space-y-6">
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        Todos nuestros pedidos se realizan por <span class="text-[#00a859] font-bold">WhatsApp</span> y
+                        con un mínimo de <span
+                            class="font-bold underline decoration-[#00a859] decoration-2 underline-offset-4">6hs
+                            antes</span>.
+                    </p>
+
+                    <!-- Recuadro destacado para fin de semana -->
+                    <div class="bg-white/50 border-2 border-[#c52c2c] p-6 rounded-[2rem] shadow-inner">
+                        <p class="text-[#c52c2c] font-black text-sm uppercase tracking-wider mb-2">
+                            Viernes, Sábado o Domingo
+                        </p>
+                        <p class="text-[#1a1c1e] font-bold text-2xl">
+                            Mínimo 48hs antes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Botón Estilo Trento (Verde) -->
+                <button id="close-modal"
+                    class="mt-10 w-full bg-[#00a859] text-white py-5 rounded-2xl font-black text-lg hover:bg-[#008f4c] transition-all shadow-lg shadow-green-900/20 active:scale-95 flex items-center justify-center gap-3">
+                    ENTENDIDO, ¡QUIERO MI TABLA!
+                </button>
+            </div>
+
+            <!-- Botón cerrar (X) -->
+            <button id="x-close"
+                class="absolute top-6 right-8 text-[#1a1c1e]/30 hover:text-[#1a1c1e] text-2xl transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('modal-advertencia');
+            const modalContent = document.getElementById('modal-content');
+            const closeBtn = document.getElementById('close-modal');
+            const xBtn = document.getElementById('x-close');
+
+            // Aparecer con suavidad después de un breve delay
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 600);
+
+            const cerrar = () => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+            };
+
+            closeBtn.addEventListener('click', cerrar);
+            xBtn.addEventListener('click', cerrar);
+            modal.addEventListener('click', (e) => { if (e.target === modal) cerrar(); });
+        });
+    </script>
+
+    <style>
+        /* Animación sutil para el icono de reloj */
+        .fa-clock {
+            animation: rotate-warning 3s ease-in-out infinite;
+        }
+
+        @keyframes rotate-warning {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            10% {
+                transform: rotate(-10deg);
+            }
+
+            20% {
+                transform: rotate(10deg);
+            }
+
+            30% {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+
+    <!-- VARIABLES DE WHATSAPP (Simuladas para los enlaces) -->
+    <!-- ==========================================
+        1. HEADER / ENCABEZADO
+    =========================================== -->
+    <header class="fixed w-full top-0 z-50 glass-header transition-all duration-300" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="imagenes/TRENTO LOGO (2).png" alt="Trento Picadas Logo"
+                        class="h-16 w-auto object-contain">
+                    <class="text-brand-green">
+                        <span class="font-sans font-extrabold text-2xl tracking-tight text-brand-dark">Trento
+                            Picadas<span class="text-brand-green"></span></span>
+                        </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-brand-dark hover:text-brand-green font-medium transition">Inicio</a>
+                    <a href="#productos"
+                        class="text-brand-dark hover:text-brand-green font-medium transition">Productos</a>
+                    <a href="#como-pedir" class="text-brand-dark hover:text-brand-green font-medium transition">Cómo
+                        pedir</a>
+                    <a href="#contacto"
+                        class="text-brand-dark hover:text-brand-green font-medium transition">Contacto</a>
+
+                    <!-- CARRITO -->
+                    <div class="relative">
+                        <button id="cart-toggle"
+                            class="relative flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-md border border-gray-200 hover:shadow-lg transition">
+                            <i class="fa-solid fa-cart-shopping text-xl text-brand-dark"></i>
+
+                            <!-- Contador -->
+                            <span id="cart-count"
+                                class="absolute -top-2 -right-2 bg-brand-green text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
+                                0
+                            </span>
+                        </button>
+
+                        <!-- Dropdown del carrito -->
+                        <div id="cart-dropdown"
+                            class="hidden absolute right-0 mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 overflow-hidden">
+
+                            <!-- Header -->
+                            <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+                                <h3 class="font-sans font-bold text-lg text-brand-dark flex items-center gap-2">
+                                    <i class="fa-solid fa-cart-shopping text-brand-green"></i>
+                                    Tu carrito
+                                </h3>
+                                <button id="cart-close" class="text-gray-400 hover:text-gray-700 transition">
+                                    <i class="fa-solid fa-xmark text-lg"></i>
+                                </button>
+                            </div>
+
+                            <!-- Productos -->
+                            <div id="cart-items" class="max-h-80 overflow-y-auto p-4 space-y-3">
+                                <p id="cart-empty" class="text-gray-500 text-sm">Tu carrito está vacío.</p>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="border-t border-gray-200 p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="font-sans font-semibold text-brand-dark">Total:</span>
+                                    <span id="cart-total"
+                                        class="font-sans font-extrabold text-xl text-brand-dark">$0</span>
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <button onclick="clearCart()"
+                                        class="w-full border-2 border-gray-200 text-gray-600 py-2.5 rounded-xl font-sans font-bold hover:border-red-400 hover:text-red-500 transition">
+                                        Vaciar carrito
+                                    </button>
+
+                                    <button onclick="sendCartToWhatsApp()"
+                                        class="w-full bg-brand-green text-white py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex items-center justify-center gap-2 shadow-lg">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                                        Finalizar pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
+                        class="bg-brand-green text-white px-6 py-2.5 rounded-full font-sans font-semibold hover:bg-green-700 hover:shadow-glow transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Pedir por WhatsApp
+                    </a>
+                </nav>
+
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-green focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-bg border-t border-white/40 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#inicio"
+                    class="block px-3 py-3 text-brand-dark font-medium hover:bg-white/50 rounded-lg">Inicio</a>
+                <a href="#productos"
+                    class="block px-3 py-3 text-brand-dark font-medium hover:bg-white/50 rounded-lg">Productos</a>
+                <a href="#como-pedir"
+                    class="block px-3 py-3 text-brand-dark font-medium hover:bg-white/50 rounded-lg">Cómo pedir</a>
+                <a href="#contacto"
+                    class="block px-3 py-3 text-brand-dark font-medium hover:bg-white/50 rounded-lg">Contacto</a>
+                <a href="https://wa.me/5491168487281?text=Hola!%20Vengo%20de%20la%20web%20y%20quiero%20hacer%20un%20pedido."
+                    target="_blank"
+                    class="block mt-4 bg-brand-green text-white px-4 py-3 rounded-full font-sans font-bold flex justify-center items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir ahora
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+        2. HERO PRINCIPAL (SECCIÓN DE IMPACTO)
+    =========================================== -->
+    <section id="inicio" class="pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+
+                <!-- Text Content -->
+                <div class="w-full lg:w-1/2 text-center lg:text-left z-10">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 text-brand-green font-semibold text-sm mb-6 shadow-sm border border-white">
+                        <i class="fa-solid fa-star text-brand-red"></i> El equilibrio perfecto entre calidad, abundancia
+                        y presentación.
+                    </div>
+                    <h1
+                        class="font-sans text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark leading-tight mb-6">
+                        Picadas artesanales para compartir <span class="text-brand-green">momentos únicos</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Elegí tu tabla favorita, elaborada con ingredientes frescos de primera calidad, y hacé tu pedido
+                        directo por WhatsApp.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#productos"
+                            class="w-full sm:w-auto bg-brand-green text-white px-8 py-4 rounded-full font-sans font-bold text-lg hover:bg-green-700 hover:shadow-glow transition-all text-center">
+                            Ver productos
+                        </a>
+                        <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
+                            class="w-full sm:w-auto border-2 border-brand-red text-brand-red px-8 py-4 rounded-full font-sans font-bold text-lg hover:bg-brand-red hover:text-white transition-all text-center">
+                            Pedir ahora
+                        </a>
+                    </div>
+
+                    <div
+                        class="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-600 font-medium">
+                        <div class="flex -space-x-3">
+                            <img class="w-10 h-10 rounded-full border-2 border-brand-bg object-cover"
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                alt="Cliente">
+                            <img class="w-10 h-10 rounded-full border-2 border-brand-bg object-cover"
+                                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80"
+                                alt="Cliente">
+                            <img class="w-10 h-10 rounded-full border-2 border-brand-bg object-cover"
+                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
+                                alt="Cliente">
+                        </div>
+                        <p>+500 pedidos entregados con éxito</p>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="w-full lg:w-1/2 relative">
+                    <!-- Decoración de fondo -->
+                    <div
+                        class="absolute inset-0 bg-brand-green opacity-10 rounded-full blur-3xl transform translate-x-10 translate-y-10">
+                    </div>
+
+                    <img src="imagenes/abundante.jpg" alt="abundante" class="relative z-10 w-full h-[400px] md:h-[500px] object-cover hero-img-mask shadow-2xl border-4
+                    border-white">
+
+                    <!-- Sello flotante -->
+                    <div class="absolute -bottom-6 -left-6 md:bottom-10 md:-left-10 z-20 bg-white p-4 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-4 animate-bounce"
+                        style="animation-duration: 3s;">
+                        <div
+                            class="bg-brand-red text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-md">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div>
+                            <p class="font-sans font-bold text-brand-dark text-sm">100% Artesanal</p>
+                            <p class="text-xs text-gray-500">Hecho con amor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+        3. SECCIÓN DE PRODUCTOS (CATÁLOGO DINÁMICO)
+    =========================================== -->
+    <section id="productos" class="py-20 bg-brand-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-16">
+                <h2 class="font-sans text-brand-green font-bold tracking-wider uppercase text-sm mb-2">Nuestro Catálogo
+                </h2>
+                <h3 class="font-sans text-3xl md:text-4xl font-extrabold text-brand-dark mb-4">Elegí tu tabla ideal</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Seleccioná la opción y el tamaño que más te guste.
+                    Hacé clic
+                    para pedirla directamente por WhatsApp. Así de simple.</p>
+            </div>
+
+            <!-- Grilla de Productos (7 Items) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+                <!-- Producto 1: Tabla Clásica Actualizado para el Carrito -->
+                <div
+                    class="product-card bg-white rounded-2xl shadow-soft border border-white/50 overflow-hidden relative flex flex-col h-full">
+                    <div class="relative aspect-square overflow-hidden">
+                        <!-- Imagen del producto -->
+                        <img src="imagenes/clasica2.jpeg" alt="Tabla Clásica" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-left">
+                        <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">Tabla Clásica</h4>
+                        <p class="text-gray-500 text-sm mb-4 flex-grow text-left leading-relaxed">
+                            Jamón Cocido • Jamón Crudo • Mortadela • Salamín picado fino • Leberwurst • Queso Sardo •
+                            Queso Holanda • Queso de Campo.<br>
+                            <span class="text-brand-green font-semibold block mt-1">+ Aceitunas, Tomates disecados y
+                                Pan.</span>
+                        </p>
+
+                        <!-- Selector de Talles -->
+                        <div class="mb-4">
+                            <span
+                                class="text-xs font-sans font-bold text-brand-dark uppercase tracking-wider mb-2 block">
+                                Seleccioná el talle:
+                            </span>
+                            <div class="flex w-full gap-1.5 size-selector" data-product="clasica">
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$29.500" data-personas="(Pican 4, Comen 2)" data-size="S">S</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$35.500" data-personas="(Pican 6, Comen 3)" data-size="M">M</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$42.000" data-personas="(Pican 8, Comen 4)" data-size="L">L</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$54.000" data-personas="(Pican 14, Comen 7)" data-size="XL">XL</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$66.000" data-personas="(Pican 20, Comen 10)"
+                                    data-size="XXL">XXL</button>
+                            </div>
+                            <!-- Indicador de personas (se actualiza por JS) -->
+                            <p class="text-xs text-brand-green font-sans font-semibold mt-2 h-4" id="personas-clasica">
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-5">
+                            <!-- Precio (se actualiza por JS) -->
+                            <span class="font-sans font-extrabold text-2xl text-brand-dark"
+                                id="price-clasica">$29.500</span>
+                        </div>
+
+                        <!-- Botón de Acción Actualizado -->
+                        <button onclick="handleAddToCart('Tabla Clásica', 'clasica')"
+                            class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-lg active:scale-95">
+                            <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 2: Tabla Alegría (DESTACADO) Actualizado -->
+                <div
+                    class="product-card bg-white rounded-2xl shadow-soft border-2 border-brand-green overflow-hidden relative flex flex-col h-full md:transform md:-translate-y-2">
+                    <span
+                        class="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide z-10 shadow-md">
+                        <i class="fa-solid fa-fire mr-1"></i> Más elegida
+                    </span>
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="imagenes/alegria.2.jpeg" alt="Tabla Alegría" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">Tabla Alegría</h4>
+                        <p class="text-gray-500 text-sm mb-4 flex-grow text-left leading-relaxed">
+                            Jamón Cocido • Salame Fuet • Leberwurst • Salamín picado fino • Panceta • Bondiola •
+                            Queso de Campo • Queso Holanda • Queso Parmesano • Queso Roquefort.<br>
+                            <span class="text-brand-green font-semibold block mt-1">+ Aceitunas, Tomates disecados y
+                                Pan.</span>
+                        </p>
+
+
+                        <div class="mb-4">
+                            <span
+                                class="text-xs font-sans font-bold text-brand-dark uppercase tracking-wider mb-2 block">Seleccioná
+                                el talle:</span>
+                            <div class="flex w-full gap-1.5 size-selector" data-product="alegria">
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$33.000" data-personas="(Pican 4, Comen 2)" data-size="S">S</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$40.000" data-personas="(Pican 6, Comen 3)" data-size="M">M</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$48.000" data-personas="(Pican 8, Comen 4)" data-size="L">L</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$61.500" data-personas="(Pican 14, Comen 7)" data-size="XL">XL</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$74.000" data-personas="(Pican 20, Comen 10)"
+                                    data-size="XXL">XXL</button>
+                            </div>
+                            <p class="text-xs text-brand-green font-sans font-semibold mt-2 h-4" id="personas-alegria">
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-sans font-extrabold text-2xl text-brand-dark"
+                                id="price-alegria">$33.000</span>
+                        </div>
+
+                        <button onclick="handleAddToCart('Tabla Alegría', 'alegria')"
+                            class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-glow active:scale-95">
+                            <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 3: Tabla Familia Actualizado -->
+                <div
+                    class="product-card bg-white rounded-2xl shadow-soft border border-white/50 overflow-hidden relative flex flex-col h-full">
+                    <span
+                        class="absolute top-4 left-4 bg-brand-dark text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">
+                        Ideal para compartir
+                    </span>
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="imagenes/t.familia.jpeg" alt="Tabla Familia" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">Tabla Familia</h4>
+                        <p class="text-gray-500 text-sm mb-4 flex-grow text-left leading-relaxed">
+                            Jamón Crudo • Chorizo Español • Lomo a las Hierbas • Salame Milán • Longaniza • Mortadela •
+                            Bondiola • Queso Parmesano • Queso Reggianito • Queso Sardo.<br>
+                            <span class="text-brand-green font-semibold block mt-1">+ Aceitunas, Tomates disecados y
+                                Pan.</span>
+                        </p>
+                        <div class="mb-4">
+                            <span
+                                class="text-xs font-sans font-bold text-brand-dark uppercase tracking-wider mb-2 block">Seleccioná
+                                el talle:</span>
+                            <div class="flex w-full gap-1.5 size-selector" data-product="familia">
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$34.500" data-personas="(Pican 4, Comen 2)" data-size="S">S</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$42.000" data-personas="(Pican 6, Comen 3)" data-size="M">M</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$50.000" data-personas="(Pican 8, Comen 4)" data-size="L">L</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$66.000" data-personas="(Pican 14, Comen 7)" data-size="XL">XL</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$80.000" data-personas="(Pican 20, Comen 10)"
+                                    data-size="XXL">XXL</button>
+                            </div>
+                            <p class="text-xs text-brand-green font-sans font-semibold mt-2 h-4" id="personas-familia">
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-sans font-extrabold text-2xl text-brand-dark"
+                                id="price-familia">$34.500</span>
+                        </div>
+
+                        <button onclick="handleAddToCart('Tabla Familia', 'familia')"
+                            class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-lg active:scale-95">
+                            <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+                <!-- Producto 4: Tabla 7 Quesos Actualizado -->
+                <div
+                    class="product-card bg-white rounded-2xl shadow-soft border border-white/50 overflow-hidden relative flex flex-col h-full">
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="imagenes/7quesos2.png" alt="Tabla 7 Quesos" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">Tabla 7 Quesos</h4>
+                        <p class="text-gray-500 text-sm mb-4 flex-grow text-left leading-relaxed">
+                            <span class="font-semibold text-brand-dark">Para amantes del queso:</span>
+                            Queso Parmesano • Queso Holanda • Queso Reggianito • Queso de Campo • Queso Fontina •
+                            Queso Sardo • Queso Roquefort.<br>
+                            <span class="text-brand-green font-semibold block mt-1">+ Aceitunas, Nueces, Tomates
+                                disecados y Pan.</span>
+                        </p>
+                        <!-- Selector de Talles -->
+                        <div class="mb-4">
+                            <span
+                                class="text-xs font-sans font-bold text-brand-dark uppercase tracking-wider mb-2 block">Seleccioná
+                                el talle:</span>
+                            <div class="flex w-full gap-1.5 size-selector" data-product="quesos">
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$32.500" data-personas="(Pican 4, Comen 2)" data-size="S">S</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$39.500" data-personas="(Pican 6, Comen 3)" data-size="M">M</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$45.000" data-personas="(Pican 8, Comen 4)" data-size="L">L</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$59.000" data-personas="(Pican 14, Comen 7)" data-size="XL">XL</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$71.500" data-personas="(Pican 20, Comen 10)"
+                                    data-size="XXL">XXL</button>
+                            </div>
+                            <p class="text-xs text-brand-green font-sans font-semibold mt-2 h-4" id="personas-quesos">
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-sans font-extrabold text-2xl text-brand-dark"
+                                id="price-quesos">$32.500</span>
+                        </div>
+
+                        <button onclick="handleAddToCart('Tabla 7 Quesos', 'quesos')"
+                            class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-lg active:scale-95">
+                            <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 5: Tabla Italia Actualizado -->
+                <div
+                    class="product-card bg-white rounded-2xl shadow-soft border border-white/50 overflow-hidden relative flex flex-col h-full">
+                    <span
+                        class="absolute top-4 left-4 bg-brand-dark text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">
+                        Favorita
+                    </span>
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="imagenes/TABLA ITALIA (1).png" alt="Tabla Italia" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">Tabla Italia</h4>
+                        <p class="text-gray-500 text-sm mb-4 flex-grow text-left leading-relaxed">
+                            <span class="font-semibold text-brand-dark">Una opción abundante, variada y llena de
+                                sabor.</span><br>
+                            Jamón Crudo • Longaniza • Panceta • Chorizo Español • Jamón Cocido • Salame Fuet •
+                            Pastrón • Queso Fontina • Queso Reggianito • Queso de Campo.<br>
+                            <span class="text-brand-green font-semibold block mt-1">+ Aceitunas, Tomates disecados y
+                                Pan.</span>
+                        </p>
+                        <!-- Selector de Talles -->
+                        <div class="mb-4">
+                            <span
+                                class="text-xs font-sans font-bold text-brand-dark uppercase tracking-wider mb-2 block">Seleccioná
+                                el talle:</span>
+                            <div class="flex w-full gap-1.5 size-selector" data-product="italia">
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$35.500" data-personas="(Pican 4, Comen 2)" data-size="S">S</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$43.500" data-personas="(Pican 6, Comen 3)" data-size="M">M</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$52.000" data-personas="(Pican 8, Comen 4)" data-size="L">L</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$67.000" data-personas="(Pican 14, Comen 7)" data-size="XL">XL</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$80.000" data-personas="(Pican 20, Comen 10)"
+                                    data-size="XXL">XXL</button>
+                            </div>
+                            <p class="text-xs text-brand-green font-sans font-semibold mt-2 h-4" id="personas-italia">
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-sans font-extrabold text-2xl text-brand-dark"
+                                id="price-italia">$35.500</span>
+                        </div>
+
+                        <button onclick="handleAddToCart('Tabla Italia', 'italia')"
+                            class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-lg active:scale-95">
+                            <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+                <!-- Producto 6: Tabla Mi Gusto Actualizado -->
+                <div
+                    class="product-card bg-white rounded-2xl shadow-soft border border-white/50 overflow-hidden relative flex flex-col h-full">
+                    <span
+                        class="absolute top-4 right-4 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10 shadow-md">
+                        Personalizada
+                    </span>
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="imagenes/migusto2.jpeg" alt="Tabla Mi Gusto" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">Tabla Mi Gusto</h4>
+                        <p class="text-gray-500 text-sm mb-4 flex-grow text-left leading-relaxed">
+                            <span class="font-semibold text-brand-dark">Armala a tu gusto con tus 10 ingredientes
+                                favoritos.</span><br>
+                            Jamón Crudo • Mortadela • Jamón Cocido • Salame Fuet • Leberwurst • Salamín picado fino •
+                            Longaniza • Panceta • Lomo a las Hierbas • Chorizo Español • Salame Milán • Bondiola •
+                            Pastrón • Queso de Campo • Queso Sardo • Queso Reggianito • Queso Fontina • Queso Holanda •
+                            Queso Parmesano • Queso Roquefort.<br>
+                            <span class="text-brand-green font-semibold block mt-1">+ Aceitunas, Tomates disecados y
+                                Pan.</span>
+                        </p>
+                        <!-- Selector de Talles -->
+                        <div class="mb-4">
+                            <span
+                                class="text-xs font-sans font-bold text-brand-dark uppercase tracking-wider mb-2 block">Seleccioná
+                                el talle:</span>
+                            <div class="flex w-full gap-1.5 size-selector" data-product="migusto">
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$39.500" data-personas="(Pican 4, Comen 2)" data-size="S">S</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$48.500" data-personas="(Pican 6, Comen 3)" data-size="M">M</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$58.000" data-personas="(Pican 8, Comen 4)" data-size="L">L</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$76.500" data-personas="(Pican 14, Comen 7)" data-size="XL">XL</button>
+                                <button
+                                    class="size-btn flex-1 py-1.5 rounded-lg border-2 font-sans text-sm font-bold transition-all text-gray-500 border-gray-200 hover:border-brand-green hover:text-brand-green"
+                                    data-price="$92.500" data-personas="(Pican 20, Comen 10)"
+                                    data-size="XXL">XXL</button>
+                            </div>
+                            <p class="text-xs text-brand-green font-sans font-semibold mt-2 h-4" id="personas-migusto">
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-sans font-extrabold text-2xl text-brand-dark"
+                                id="price-migusto">$39.500</span>
+                        </div>
+
+                        <button onclick="handleAddToCart('Tabla Mi Gusto', 'migusto')"
+                            class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-lg active:scale-95">
+                            <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 7: Tabla Individual Actualizado -->
+                <div
+                    class="product-card bg-white rounded-2xl shadow-soft border border-white/50 overflow-hidden relative flex flex-col h-full">
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="imagenes/T.individual.jpeg" alt="Tabla Individual" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h2 class="font-sans font-bold text-xl text-brand-dark mb-2">Tabla Individual</h2>
+                        <p class="text-gray-500 text-sm mb-4 flex-grow text-left leading-relaxed">
+                            <span class="font-semibold text-brand-dark">La porción perfecta para darte un
+                                gusto.</span><br>
+                            Selección equilibrada de Jamón Cocido • Jamón Crudo • Mortadela • Salame Fuet • Leberwurst •
+                            Salame Milán • Queso Fontina • Queso Holanda.<br>
+                            <span class="text-brand-green font-semibold block mt-1">+ Aceitunas, Nueces, Tomates
+                                disecados y Pan.</span>
+                        </p>
+                        <!-- Etiqueta estática para tabla individual -->
+                        <div class="mb-4">
+                            <span
+                                class="text-xs font-sans font-bold text-brand-dark uppercase tracking-wider mb-2 block">Talle
+                                Único:</span>
+                            <div class="flex w-full">
+                                <span
+                                    class="bg-gray-100 text-brand-dark font-sans text-sm font-bold py-1.5 px-4 rounded-lg border-2 border-gray-200">
+                                    Talle Único
+                                </span>
+                            </div>
+                            <p id="personas-individual"
+                                class="text-xs text-brand-green font-sans font-semibold mt-2 h-4">(Pican 2, Come 1)</p>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-sans font-extrabold text-2xl text-brand-dark"
+                                id="price-individual">$21.000</span>
+                        </div>
+
+                        <!-- En la individual pasamos 'S' fijo como talle -->
+                        <button onclick="handleAddToCart('Tabla Individual', 'individual', 'S', 11500)"
+                            class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-lg active:scale-95">
+                            <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Script de Selección de Talles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sizeSelectors = document.querySelectorAll('.size-selector');
+
+            sizeSelectors.forEach(selector => {
+                const buttons = selector.querySelectorAll('.size-btn');
+                const productId = selector.dataset.product;
+
+                const priceEl = document.getElementById(`price-${productId}`);
+                const personasEl = document.getElementById(`personas-${productId}`);
+                const waLinkEl = document.getElementById(`wa-${productId}`);
+
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // 1. Quitar el estado activo (resetear a estado original) de todos
+                        buttons.forEach(b => {
+                            b.classList.remove('bg-brand-green', 'text-white', 'border-brand-green');
+                            b.classList.add('bg-transparent', 'text-gray-500', 'border-gray-200');
+                        });
+
+                        // 2. Aplicar estado activo (Tus colores corporativos) al seleccionado
+                        btn.classList.add('bg-brand-green', 'text-white', 'border-brand-green');
+                        btn.classList.remove('bg-transparent', 'text-gray-500', 'border-gray-200');
+
+                        // 3. Actualizar Precio con fuente Sans Bold de tu diseño
+                        priceEl.textContent = btn.dataset.price;
+
+                        // 4. Actualizar texto de "(Pican X, Comen Y)"
+                        personasEl.textContent = btn.dataset.personas;
+
+                        // 5. Actualizar el link de WhatsApp
+                        const baseUrl = waLinkEl.dataset.base;
+                        const size = btn.dataset.size;
+                        waLinkEl.href = `${baseUrl}%20en%20talle%20${size}.`;
+                    });
+                });
+
+                // Click automático al primer talle (S) para iniciar el diseño
+                if (buttons.length > 0) {
+                    buttons[0].click();
+                }
+            });
+        });
+    </script>
+    <!--Script de ENVIOS -->
+    <section id="envios" class="py-12 bg-brand-green relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: url('data:image/svg+xml,%3Csvg width=%2760%27 height=%2760%27 viewBox=%270 0 60 60%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg fill=%27none%27 fill-rule=%27evenodd%27%3E%3Cg fill=%27%23ffffff%27 fill-opacity=%271%27%3E%3Cpath d=%27M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+            </div>
+            <div
+                class="bg-white/95 rounded-[2rem] border border-white/60 shadow-xl px-6 py-8 md:px-10 md:py-10 relative z-10">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-bg flex items-center justify-center text-brand-green text-xl shadow-sm">
+                        <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+                    </div>
+                    <h3
+                        class="font-sans text-2xl md:text-3xl font-extrabold tracking-[0.18em] text-brand-dark uppercase">
+                        Envios</h3>
+                </div>
+                <div class="space-y-4 max-w-2xl mx-auto">
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        <span class="text-base md:text-lg text-brand-dark font-medium">Retiros sin costo por
+                            Caballito</span>
+                        <span class="text-base md:text-lg font-bold text-brand-green">Gratis</span>
+                    </div>
+                    <div class="h-px bg-white/90"></div>
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        <span class="text-base md:text-lg text-brand-dark font-medium">Envíos hasta 4 km</span>
+                        <span class="text-base md:text-lg font-bold text-brand-dark">$5.000</span>
+                    </div>
+                    <div class="h-px bg-white/90"></div>
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        <span class="text-base md:text-lg text-brand-dark font-medium">De 4 km a 8 km</span>
+                        <span class="text-base md:text-lg font-bold text-brand-dark">$6.000</span>
+                    </div>
+                    <div class="h-px bg-white/90"></div>
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-center sm:text-left">
+                        <span class="text-base md:text-lg text-brand-dark font-medium">Más de 8 km</span>
+                        <span class="text-base md:text-lg font-bold text-brand-dark">$7.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== 4. SECCIÓN CÓMO PEDIR=========================================== -->
+    <section id="como-pedir" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-sans text-brand-green font-bold tracking-wider uppercase text-sm mb-2">Proceso de
+                    Compra
+                </h2>
+                <h3 class="font-sans text-3xl md:text-4xl font-extrabold text-brand-dark mb-4">Cómo pedir en 3
+                    simples
+                    pasos</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 relative">
+                <!-- Línea conectora solo visible en desktop -->
+                <div
+                    class="hidden md:block absolute top-1/2 left-[15%] right-[15%] h-0.5 bg-gray-200 -translate-y-1/2 z-0">
+                </div>
+
+                <!-- Paso 1 -->
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div
+                        class="w-20 h-20 bg-brand-bg rounded-full flex items-center justify-center text-brand-green text-3xl mb-6 shadow-sm border-4 border-white">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">1. Elegí tu tabla</h4>
+                    <p class="text-gray-500">Mirá nuestro catálogo visual y elegí la picada que más te tiente.</p>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div
+                        class="w-20 h-20 bg-brand-bg rounded-full flex items-center justify-center text-brand-red text-3xl mb-6 shadow-sm border-4 border-white">
+                        <i class="fa-solid fa-hand-pointer"></i>
+                    </div>
+                    <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">2. Tocá en pedir</h4>
+                    <p class="text-gray-500">Hacé clic en el botón de la tabla elegida. Te llevará directo a nuestro
+                        chat.</p>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div
+                        class="w-20 h-20 bg-brand-green rounded-full flex items-center justify-center text-white text-3xl mb-6 shadow-glow border-4 border-white">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h4 class="font-sans font-bold text-xl text-brand-dark mb-2">3. Pedí por WhatsApp</h4>
+                    <p class="text-gray-500">Confirmamos tu pedido, coordinamos el envío y ¡listo para disfrutar!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================5. SECCIÓN DE BENEFICIOS / CONFIANZA=========================================== -->
+    <section class="py-16 bg-brand-bg border-t border-b border-white/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <div class="flex flex-col items-center text-center p-4">
+                    <i class="fa-solid fa-leaf text-brand-green text-4xl mb-4"></i>
+                    <h4 class="font-sans font-bold text-brand-dark mb-1">Frescura 100%</h4>
+                    <p class="text-sm text-gray-600">Ingredientes frescos y de primera calidad.</p>
+                </div>
+
+                <div class="flex flex-col items-center text-center p-4">
+                    <i class="fa-solid fa-gift text-brand-green text-4xl mb-4"></i>
+                    <h4 class="font-sans font-bold text-brand-dark mb-1">Presentación Premium</h4>
+                    <p class="text-sm text-gray-600">Ideales para regalos, reuniones y eventos.</p>
+                </div>
+
+                <div class="flex flex-col items-center text-center p-4">
+                    <i class="fa-solid fa-hands-holding-circle text-brand-green text-4xl mb-4"></i>
+                    <h4 class="font-sans font-bold text-brand-dark mb-1">Elaboración Artesanal</h4>
+                    <p class="text-sm text-gray-600">Cortado y armado en el momento con dedicación.</p>
+                </div>
+
+                <div class="flex flex-col items-center text-center p-4">
+                    <i class="fa-solid fa-headset text-brand-green text-4xl mb-4"></i>
+                    <h4 class="font-sans font-bold text-brand-dark mb-1">Atención Personalizada</h4>
+                    <p class="text-sm text-gray-600">Te asesoramos directo por WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================6. SECCIÓN DE TESTIMONIOS=========================================== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="font-sans text-3xl md:text-4xl font-extrabold text-brand-dark mb-4">Nuestros clientes
+                    felices
+                </h3>
+                <p class="text-gray-600">No lo decimos nosotros, lo dicen quienes ya nos probaron.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
+                    <div class="text-brand-green mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-4">"Excelente calidad y presentación. La pedimos para un
+                        cumpleaños y a todos les encantó."</p>
+                    <p class="font-sans font-bold text-brand-dark text-sm">- Martín G.</p>
+                </div>
+
+                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
+                    <div class="text-brand-green mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-4">"Ideal para regalar, quedó hermosa. El packaging impecable
+                        y
+                        los fiambres de primera."</p>
+                    <p class="font-sans font-bold text-brand-dark text-sm">- Sofía L.</p>
+                </div>
+
+                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
+                    <div class="text-brand-green mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-4">"Llegó impecable y súper abundante. Se nota la dedicación.
+                        Volveré a comprar seguro."</p>
+                    <p class="font-sans font-bold text-brand-dark text-sm">- Juan Pablo C.</p>
+                </div>
+
+                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
+                    <div class="text-brand-green mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-4">"Muy buena atención y entrega súper puntual. El proceso por
+                        WhatsApp fue rapidísimo."</p>
+                    <p class="font-sans font-bold text-brand-dark text-sm">- Laura M.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== 7. SECCIÓN FINAL CTA =========================================== -->
+    <section class="py-24 bg-brand-green relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="font-sans text-4xl md:text-5xl font-extrabold text-white mb-6">¿Ya elegiste tu favorita?</h2>
+            <p class="text-xl text-green-100 mb-10">Hacé tu pedido por WhatsApp y disfrutá una picada premium lista
+                para
+                compartir.</p>
+            <a href="https://wa.me/5491100000000?text=Hola!%20Ya%20miré%20el%20catálogo%20y%20quiero%20hacer%20un%20pedido."
+                target="_blank"
+                class="inline-flex items-center gap-3 bg-white text-brand-green px-10 py-5 rounded-full font-sans font-bold text-xl hover:bg-brand-bg hover:scale-105 transition-all shadow-xl">
+                <i class="fa-brands fa-whatsapp text-2xl"></i> Pedir por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- ========================================== 8. SECCIÓN FOOTER =========================================== -->
+    <footer class="bg-[#3f3f3f] text-gray-300 font-sans">
+        <!-- Barra superior verde con patrón -->
+        <div class="h-4 w-full bg-pattern-green"></div>
+
+        <!-- Contenedor principal -->
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+                <!-- Columna 1: Marca y descripción -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-3 mb-4">
+                        <!-- Ícono de la marca -->
+                        <div class="logo-circle">
+                            <img src="imagenes/TRENTO LOGO (2).png" alt="Trento Picadas">
+
+                        </div>
+
+                        <span class="text-white text-xl font-bold tracking-wide">Trento Picadas</span>
+                    </div>
+                    <p class="text-sm text-[#a1a1aa] mb-6 leading-relaxed">
+                        Picadas artesanales. <br> El equilibrio perfecto entre calidad, abundancia y presentación.
+                    </p>
+                    <!-- Redes sociales -->
+                    <div class="flex gap-3">
+                        <a href="https://www.instagram.com/trento.picadas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="w-9 h-9 rounded-full bg-gray-600/50 flex items-center justify-center text-white hover:bg-[#10b981] transition-colors duration-300">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/1GnU2X8iXX/"
+                            class="w-9 h-9 rounded-full bg-gray-600/50 flex items-center justify-center text-white hover:bg-[#10b981] transition-colors duration-300">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Menú -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4 pb-3 border-b border-gray-600/50">Menú</h3>
+                    <ul class="space-y-3 text-sm text-[#a1a1aa]">
+                        <li><a href="#" class="hover:text-[#10b981] transition-colors duration-200">Inicio</a></li>
+                        <li><a href="#" class="hover:text-[#10b981] transition-colors duration-200">Catálogo de
+                                Productos</a></li>
+                        <li><a href="#" class="hover:text-[#10b981] transition-colors duration-200">Cómo Pedir</a>
+                        </li>
+                        <li><a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada."
+                                class="hover:text-[#10b981] transition-colors duration-200">Contacto por
+                                WhatsApp</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Información útil -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4 pb-3 border-b border-gray-600/50">Información útil
+                    </h3>
+                    <div class="space-y-5 text-sm">
+                        <!-- Zona de Entrega -->
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-truck text-[#10b981] text-base mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Zona de Entrega</h4>
+                                <p class="text-[#a1a1aa] leading-relaxed"> Retiros por Caballito.
+                                    <br>Envíos a CABA y
+                                    alrededores.<br>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Horarios -->
+                        <div class="flex items-start gap-3">
+                            <i class="fa-regular fa-clock text-[#10b981] text-base mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Horarios de atención</h4>
+                                <p class="text-[#a1a1aa]">Lun a Sáb de 09:00 a 21:00hs. <br>Dom de 10:00 a 14:00hs.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 4: Contacto -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4 pb-3 border-b border-gray-600/50">Contacto</h3>
+                    <p class="text-sm text-[#a1a1aa] mb-6 leading-relaxed">
+                        Escribinos directamente para realizar tu pedido o consultar dudas.
+                    </p>
+                    <!-- Botón WhatsApp -->
+                    <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
+                        class="inline-flex items-center gap-2 border border-[#047857] text-[#10b981] px-5 py-2.5 rounded-full hover:bg-[#10b981] hover:text-white transition-all duration-300 text-sm font-medium">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> +54 9 11 6848-7281
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Barra inferior (Copyright) -->
+        <div class="border-t border-gray-600/50 mx-auto max-w-7xl px-6 py-6 text-center">
+            <p class="text-sm text-gray-500">
+                &copy; 2026 Trento Picadas. Todos los derechos reservados.
+            </p>
+        </div>
+        <style>
+            .logo-circle {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                overflow: hidden;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #e5e2d8;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+            }
+
+            .logo-circle img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                background-color: #e5e2d8;
+                display: block;
+                border-radius: 50%;
+            }
+        </style>
+
+    </footer>
+    <!-- ==========================================
+        BOTÓN FLOTANTE DE INSTAGRAM (ESTILO WHATSAPP)
+    =========================================== -->
+
+    <!-- Enlace a Font Awesome para el icono -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <a href="https://www.instagram.com/trento.picadas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+        target="_blank" class="instagram-float-combined" aria-label="Ver nuestro Instagram">
+        <i class="fa-brands fa-instagram"></i>
+        <span class="tooltip-insta">¡Seguinos!</span>
+    </a>
+
+    <style>
+        /* Usamos una clase personalizada que imita las de Tailwind del botón de WhatsApp 
+    pero con el cálculo de altura (bottom) para que no se encimen.
+    */
+        .instagram-float-combined {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            color: white;
+            text-decoration: none;
+            z-index: 50;
+            transition: transform 0.3s;
+
+            /* Estilo visual de Instagram */
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            box-shadow: 0 10px 15px -3px rgba(214, 36, 159, 0.3), 0 4px 6px -2px rgba(214, 36, 159, 0.05);
+
+            /* Animación idéntica a la de WhatsApp */
+            animation: bounce 2s infinite;
+            animation-iteration-count: 3;
+            /* Se detiene después de 3 ciclos como el original */
+        }
+
+        /* TAMAÑO Y POSICIÓN */
+        /* Mobile (Equivalente a w-16 h-16, right-6, bottom-6 + espacio) */
+        @media (max-width: 767px) {
+            .instagram-float-combined {
+                width: 64px;
+                height: 64px;
+                right: 24px;
+                /* right-6 */
+                bottom: 104px;
+                /* 24px base + 64px botón + 16px aire */
+                font-size: 30px;
+            }
+        }
+
+        /* Desktop (Equivalente a w-16 h-16, right-10, bottom-10 + espacio) */
+        @media (min-width: 768px) {
+            .instagram-float-combined {
+                width: 64px;
+                height: 64px;
+                right: 40px;
+                /* right-10 */
+                bottom: 120px;
+                /* 40px base + 64px botón + 16px aire */
+                font-size: 32px;
+            }
+        }
+
+        /* Hover: Escala igual que el de WhatsApp */
+        .instagram-float-combined:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 25px -5px rgba(214, 36, 159, 0.4);
+        }
+
+        /* Tooltip */
+        .tooltip-insta {
+            position: absolute;
+            right: 85px;
+            background-color: #1a1c1e;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-family: sans-serif;
+            font-weight: bold;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .instagram-float-combined:hover .tooltip-insta {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Definición de la animación Bounce (si no está en tu CSS principal) */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+
+            50% {
+                transform: translateY(0);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+        }
+    </style>
+
+    <!-- ==========================================
+        BOTÓN FLOTANTE WHATSAPP
+    =========================================== -->
+    <a href="https://wa.me/5491100000000?text=Hola!%20Vengo%20de%20la%20página%20web%20y%20necesito%20ayuda."
+        target="_blank"
+        class="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-green text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-glow hover:scale-110 transition-transform z-50 animate-bounce"
+        style="animation-duration: 2s; animation-iteration-count: 3;">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Funcionalidad JS del menú y header -->
+    <script>
+        // Manejo del menú hamburguesa mobile
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const menuLinks = menu.querySelectorAll('a');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (mobile)
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Efecto del Header al hacer scroll (Añadir sombra al bajar)
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+<script>
+    let cart = [];
+    const WHATSAPP_PHONE = "5491168487281";
+
+    function buildWhatsAppUrl(message) {
+        return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initModal();
+
+        const cartToggle = document.getElementById('cart-toggle');
+        const cartDropdown = document.getElementById('cart-dropdown');
+        const cartClose = document.getElementById('cart-close');
+
+        // Abrir / cerrar carrito
+        if (cartToggle && cartDropdown) {
+            cartToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                cartDropdown.classList.toggle('hidden');
+            });
+        }
+
+        if (cartClose && cartDropdown) {
+            cartClose.addEventListener('click', () => {
+                cartDropdown.classList.add('hidden');
+            });
+        }
+
+        // Cerrar si clickeás afuera
+        document.addEventListener('click', (e) => {
+            if (
+                cartDropdown &&
+                cartToggle &&
+                !cartDropdown.contains(e.target) &&
+                !cartToggle.contains(e.target)
+            ) {
+                cartDropdown.classList.add('hidden');
+            }
+        });
+
+        // Inicializar selectores de talle
+        initSizeSelectors();
+
+        // Render inicial
+        renderCart();
+    });
+
+    function initSizeSelectors() {
+        document.querySelectorAll('.size-selector').forEach(selector => {
+            const productKey = selector.dataset.product;
+            const buttons = selector.querySelectorAll('.size-btn');
+            const priceEl = document.getElementById(`price-${productKey}`);
+            const personasEl = document.getElementById(`personas-${productKey}`);
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    buttons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-brand-green', 'text-white', 'border-brand-green');
+                        btn.classList.add('text-gray-500', 'border-gray-200');
+                    });
+
+                    button.classList.add('active', 'bg-brand-green', 'text-white', 'border-brand-green');
+                    button.classList.remove('text-gray-500', 'border-gray-200');
+
+                    if (priceEl) priceEl.textContent = button.dataset.price;
+                    if (personasEl) personasEl.textContent = button.dataset.personas;
+                });
+
+                // Seleccionar automáticamente el primer talle
+                if (index === 0) {
+                    button.classList.add('active', 'bg-brand-green', 'text-white', 'border-brand-green');
+                    button.classList.remove('text-gray-500', 'border-gray-200');
+
+                    if (priceEl) priceEl.textContent = button.dataset.price;
+                    if (personasEl) personasEl.textContent = button.dataset.personas;
+                }
+            });
+        });
+    }
+
+    function handleAddToCart(productName, productKey, fixedSize = null, fixedPrice = null) {
+        let size, price, personas;
+
+        // CASO 1: Producto con talle fijo
+        if (fixedSize !== null && fixedPrice !== null) {
+            size = fixedSize;
+            price = fixedPrice;
+
+            const individualPersonasEl = document.getElementById(`personas-${productKey}`);
+            personas = individualPersonasEl ? individualPersonasEl.textContent.trim() : '(Pican 2, Come 1)';
+        } else {
+            // CASO 2: Productos normales con selector de talle
+            const selector = document.querySelector(`.size-selector[data-product="${productKey}"]`);
+            const selectedBtn = selector ? selector.querySelector('.size-btn.active') : null;
+
+            if (!selectedBtn) {
+                alert('Por favor, seleccioná un talle antes de agregar al carrito.');
+                return;
+            }
+
+            size = selectedBtn.dataset.size;
+            const priceText = selectedBtn.dataset.price;
+            personas = selectedBtn.dataset.personas;
+            price = parsePrice(priceText);
+        }
+
+        const item = {
+            id: Date.now() + Math.random(),
+            name: productName,
+            size: size,
+            personas: personas,
+            price: price
+        };
+
+        cart.push(item);
+        renderCart();
+
+        const cartDropdown = document.getElementById('cart-dropdown');
+        if (cartDropdown) {
+            cartDropdown.classList.remove('hidden');
+        }
+    }
+
+    function renderCart() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotal = document.getElementById('cart-total');
+
+        if (!cartItemsContainer || !cartCount || !cartTotal) return;
+
+        cartItemsContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `
+                <p id="cart-empty" class="text-gray-500 text-sm">Tu carrito está vacío.</p>
+            `;
+            cartCount.textContent = '0';
+            cartTotal.textContent = '$0';
+            return;
+        }
+
+        let total = 0;
+
+        cart.forEach(item => {
+            total += item.price;
+
+            const itemHTML = `
+                <div class="flex items-start justify-between gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50">
+                    <div class="flex-1">
+                        <h4 class="font-sans font-bold text-brand-dark text-sm">${item.name}</h4>
+                        <p class="text-xs text-gray-500">Talle: ${item.size}</p>
+                        <p class="text-xs text-brand-green font-semibold">${item.personas}</p>
+                        <p class="text-sm font-bold text-brand-dark mt-1">${formatPrice(item.price)}</p>
+                    </div>
+                    <button onclick="removeFromCart('${item.id}')"
+                        class="text-red-500 hover:text-red-700 transition text-sm">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `;
+
+            cartItemsContainer.innerHTML += itemHTML;
+        });
+
+        cartCount.textContent = cart.length;
+        cartTotal.textContent = formatPrice(total);
+    }
+
+    function removeFromCart(itemId) {
+        cart = cart.filter(item => item.id != itemId);
+        renderCart();
+    }
+
+    function clearCart() {
+        cart = [];
+        renderCart();
+    }
+
+    function parsePrice(priceText) {
+        return Number(priceText.replace(/\$/g, '').replace(/\./g, '').replace(/,/g, '').trim());
+    }
+
+    function formatPrice(price) {
+        return '$' + price.toLocaleString('es-AR');
+    }
+
+    function initModal() {
+        const modal = document.getElementById("modal-advertencia");
+        const modalContent = document.getElementById("modal-content");
+        const closeBtn = document.getElementById("close-modal");
+        const xBtn = document.getElementById("x-close");
+
+        if (!modal || !modalContent || !closeBtn || !xBtn) return;
+
+        let previousFocus = null;
+        let onConfirm = null;
+
+        const getFocusableElements = () =>
+            modalContent.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+
+        const openModal = (options = {}) => {
+            onConfirm = typeof options.onConfirm === "function" ? options.onConfirm : null;
+            previousFocus = document.activeElement;
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modalContent.classList.remove("scale-95");
+            modalContent.classList.add("scale-100");
+            modal.setAttribute("aria-hidden", "false");
+            closeBtn.focus();
+            document.body.classList.add("overflow-hidden");
+        };
+
+        const closeModal = () => {
+            modal.classList.add("opacity-0", "pointer-events-none");
+            modalContent.classList.remove("scale-100");
+            modalContent.classList.add("scale-95");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("overflow-hidden");
+            if (previousFocus instanceof HTMLElement) previousFocus.focus();
+        };
+
+        setTimeout(openModal, 600);
+
+        closeBtn.addEventListener("click", () => {
+            const confirmAction = onConfirm;
+            onConfirm = null;
+            closeModal();
+            confirmAction?.();
+        });
+
+        xBtn.addEventListener("click", closeModal);
+
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) closeModal();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            const isOpen = modal.getAttribute("aria-hidden") === "false";
+            if (!isOpen) return;
+
+            if (event.key === "Escape") closeModal();
+
+            if (event.key === "Tab") {
+                const focusableElements = Array.from(getFocusableElements());
+                if (!focusableElements.length) return;
+
+                const first = focusableElements[0];
+                const last = focusableElements[focusableElements.length - 1];
+
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+        window.orderNoticeModal = {
+            open: openModal,
+            close: closeModal,
+        };
+    }
+
+    function sendCartToWhatsApp() {
+        if (cart.length === 0) {
+            alert("Tu carrito esta vacio.");
+            return;
+        }
+
+        const itemsText = cart
+            .map((item, index) => `${index + 1}. ${item.name} - Talle ${item.size} - ${item.personas} - ${formatPrice(item.price)}`)
+            .join("\n");
+
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        const message = `Hola! Quiero hacer un pedido:\n\n${itemsText}\n\n*Total:* ${formatPrice(total)}`;
+
+        const openWhatsApp = () => {
+            const url = buildWhatsAppUrl(message);
+            const newWindow = window.open(url, "_blank", "noopener");
+
+            if (!newWindow) {
+                window.location.href = url;
+            }
+        };
+
+        if (window.orderNoticeModal?.open) {
+            window.orderNoticeModal.open({ onConfirm: openWhatsApp });
+            return;
+        }
+
+        openWhatsApp();
+    }
+</script>
