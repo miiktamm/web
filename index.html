@@ -270,36 +270,36 @@
                                         class="font-sans font-extrabold text-xl text-brand-dark">$0</span>
                                 </div>
 
-                                <div class="flex flex-col gap-2">
-                                    <button onclick="clearCart()"
-                                        class="w-full border-2 border-gray-200 text-gray-600 py-2.5 rounded-xl font-sans font-bold hover:border-red-400 hover:text-red-500 transition">
-                                        Vaciar carrito
-                                    </button>
+                                <button onclick="document.getElementById('cart-dropdown').classList.add('hidden')"
+                                    class="w-full border-2 border-gray-200 text-gray-600 py-2.5 rounded-xl font-sans font-bold hover:border-brand-green hover:text-brand-green transition">
+                                    Seguir comprando
+                                </button>
 
-                                    <button onclick="sendCartToWhatsApp()"
-                                        class="w-full bg-brand-green text-white py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex items-center justify-center gap-2 shadow-lg">
-                                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                                        Finalizar pedido
-                                    </button>
-                                </div>
+
+                                <button onclick="sendCartToWhatsApp()"
+                                    class="w-full bg-brand-green text-white py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex items-center justify-center gap-2 shadow-lg">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    Finalizar pedido
+                                </button>
                             </div>
                         </div>
                     </div>
-
-                    <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
-                        class="bg-brand-green text-white px-6 py-2.5 rounded-full font-sans font-semibold hover:bg-green-700 hover:shadow-glow transition-all flex items-center gap-2">
-                        <i class="fa-brands fa-whatsapp text-lg"></i> Pedir por WhatsApp
-                    </a>
-                </nav>
-
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-green focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
             </div>
+
+            <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
+                class="bg-brand-green text-white px-6 py-2.5 rounded-full font-sans font-semibold hover:bg-green-700 hover:shadow-glow transition-all flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Pedir por WhatsApp
+            </a>
+            </nav>
+
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-green focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
         </div>
 
         <!-- Mobile Menu Dropdown -->
@@ -348,10 +348,6 @@
                         <a href="#productos"
                             class="w-full sm:w-auto bg-brand-green text-white px-8 py-4 rounded-full font-sans font-bold text-lg hover:bg-green-700 hover:shadow-glow transition-all text-center">
                             Ver productos
-                        </a>
-                        <a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada." target="_blank"
-                            class="w-full sm:w-auto border-2 border-brand-red text-brand-red px-8 py-4 rounded-full font-sans font-bold text-lg hover:bg-brand-red hover:text-white transition-all text-center">
-                            Pedir ahora
                         </a>
                     </div>
 
@@ -800,7 +796,7 @@
                         </div>
 
                         <!-- En la individual pasamos 'S' fijo como talle -->
-                        <button onclick="handleAddToCart('Tabla Individual', 'individual', 'S', 11500)"
+                        <button onclick="handleAddToCart('Tabla Individual', 'individual', 'S', 21000)"
                             class="w-full bg-brand-green text-white text-center py-3 rounded-xl font-sans font-bold hover:bg-green-700 transition flex justify-center items-center gap-2 shadow-lg active:scale-95">
                             <i class="fa-solid fa-cart-plus text-lg"></i> Agregar al carrito
                         </button>
@@ -870,7 +866,7 @@
                     </div>
                     <h3
                         class="font-sans text-2xl md:text-3xl font-extrabold tracking-[0.18em] text-brand-dark uppercase">
-                        Envios</h3>
+                        Envios a CABA</h3>
                 </div>
                 <div class="space-y-4 max-w-2xl mx-auto">
                     <div
@@ -987,66 +983,6 @@
         </div>
     </section>
 
-    <!-- ==========================================6. SECCIÓN DE TESTIMONIOS=========================================== -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h3 class="font-sans text-3xl md:text-4xl font-extrabold text-brand-dark mb-4">Nuestros clientes
-                    felices
-                </h3>
-                <p class="text-gray-600">No lo decimos nosotros, lo dicen quienes ya nos probaron.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
-                    <div class="text-brand-green mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"Excelente calidad y presentación. La pedimos para un
-                        cumpleaños y a todos les encantó."</p>
-                    <p class="font-sans font-bold text-brand-dark text-sm">- Martín G.</p>
-                </div>
-
-                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
-                    <div class="text-brand-green mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"Ideal para regalar, quedó hermosa. El packaging impecable
-                        y
-                        los fiambres de primera."</p>
-                    <p class="font-sans font-bold text-brand-dark text-sm">- Sofía L.</p>
-                </div>
-
-                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
-                    <div class="text-brand-green mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"Llegó impecable y súper abundante. Se nota la dedicación.
-                        Volveré a comprar seguro."</p>
-                    <p class="font-sans font-bold text-brand-dark text-sm">- Juan Pablo C.</p>
-                </div>
-
-                <div class="bg-brand-bg p-6 rounded-2xl shadow-sm border border-white">
-                    <div class="text-brand-green mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"Muy buena atención y entrega súper puntual. El proceso por
-                        WhatsApp fue rapidísimo."</p>
-                    <p class="font-sans font-bold text-brand-dark text-sm">- Laura M.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ========================================== 7. SECCIÓN FINAL CTA =========================================== -->
     <section class="py-24 bg-brand-green relative overflow-hidden">
         <!-- Decoración de fondo -->
@@ -1101,21 +1037,6 @@
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
                     </div>
-                </div>
-
-                <!-- Columna 2: Menú -->
-                <div>
-                    <h3 class="text-white font-bold text-lg mb-4 pb-3 border-b border-gray-600/50">Menú</h3>
-                    <ul class="space-y-3 text-sm text-[#a1a1aa]">
-                        <li><a href="#" class="hover:text-[#10b981] transition-colors duration-200">Inicio</a></li>
-                        <li><a href="#" class="hover:text-[#10b981] transition-colors duration-200">Catálogo de
-                                Productos</a></li>
-                        <li><a href="#" class="hover:text-[#10b981] transition-colors duration-200">Cómo Pedir</a>
-                        </li>
-                        <li><a href="https://wa.me/5491168487281?text=Hola%20quiero%20pedir%20una%20picada."
-                                class="hover:text-[#10b981] transition-colors duration-200">Contacto por
-                                WhatsApp</a></li>
-                    </ul>
                 </div>
 
                 <!-- Columna 3: Información útil -->
@@ -1194,7 +1115,7 @@
 
     </footer>
     <!-- ==========================================
-    CARRITO FLOTANTE MOBILE
+CARRITO FLOTANTE MOBILE
 =========================================== -->
     <div id="mobile-cart-overlay" class="hidden md:hidden fixed inset-0 bg-[#1a1c1e]/50 backdrop-blur-sm z-40"
         aria-hidden="true"></div>
@@ -1223,8 +1144,8 @@
 
             <div class="flex flex-col gap-2">
                 <button id="mobile-clear-cart" type="button"
-                    class="w-full border-2 border-gray-200 text-gray-600 py-2.5 rounded-xl font-sans font-bold hover:border-red-400 hover:text-red-500 transition">
-                    Vaciar carrito
+                    class="w-full border-2 border-gray-200 text-gray-600 py-2.5 rounded-xl font-sans font-bold hover:border-brand-green hover:text-brand-green transition">
+                    Seguir comprando
                 </button>
 
                 <button id="mobile-send-cart" type="button"
@@ -1374,7 +1295,7 @@
     <!-- ==========================================
         BOTÓN FLOTANTE WHATSAPP
     =========================================== -->
-    <a href="https://wa.me/5491100000000?text=Hola!%20Vengo%20de%20la%20página%20web%20y%20necesito%20ayuda."
+    <a href="https://wa.me/5491168487281?text=Hola!%20Vengo%20de%20la%20página%20web%20y%20necesito%20ayuda."
         target="_blank"
         class="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-green text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-glow hover:scale-110 transition-transform z-50 animate-bounce"
         style="animation-duration: 2s; animation-iteration-count: 3;">
@@ -1467,8 +1388,11 @@
             });
         }
 
-        if (mobileClearCart) {
-            mobileClearCart.addEventListener('click', clearCart);
+        if (mobileClearCart && mobileCartPanel && mobileCartOverlay) {
+            mobileClearCart.addEventListener('click', () => {
+                mobileCartPanel.classList.add('hidden');
+                mobileCartOverlay.classList.add('hidden');
+            });
         }
 
         if (mobileSendCart) {
