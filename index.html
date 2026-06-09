@@ -1625,13 +1625,18 @@
 
     function handleAddToCart(productName, productKey, fixedSize = null, fixedPrice = null) {
         let size, price, personas;
-
         if (fixedSize !== null && fixedPrice !== null) {
             size = fixedSize;
             price = fixedPrice;
 
-            const individualPersonasEl = document.getElementById(`personas-${productKey}`);
-            personas = individualPersonasEl ? individualPersonasEl.textContent.trim() : '(Pican 2, Come 1)';
+            if (productKey === 'mundial') {
+                personas = '(Pican entre 8 y 10 personas)';
+            } else {
+                const individualPersonasEl = document.getElementById(`personas-${productKey}`);
+                personas = individualPersonasEl
+                    ? individualPersonasEl.textContent.trim()
+                    : '(Pican 2, Come 1)';
+            }
         } else {
             const selector = document.querySelector(`.size-selector[data-product="${productKey}"]`);
             const selectedBtn = selector ? selector.querySelector('.size-btn.active') : null;
