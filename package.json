@@ -1,0 +1,20 @@
+{
+  "name": "trentopicadas",
+  "version": "1.0.0",
+  "description": "Trento Picadas Artesanales - Catálogo",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'No build step needed for static HTML'",
+    "lint": "echo 'No linting configured'"
+  },
+  "keywords": [
+    "picadas",
+    "artesanales"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
